@@ -1,7 +1,5 @@
 package localsearch.applications;
 
-
-
 import localsearch.constraints.basic.IsEqual;
 import localsearch.constraints.basic.LessOrEqual;
 import localsearch.constraints.basic.LessThan;

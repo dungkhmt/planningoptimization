@@ -1,13 +1,15 @@
-package class118133.pqd;
+package class118133.phamminhkhiem;
 
 import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
 import com.google.ortools.linearsolver.MPSolver;
 import com.google.ortools.linearsolver.MPVariable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 
 public class TSP {
 	{
@@ -15,19 +17,26 @@ public class TSP {
 	}
 
 	int N;
-	int[][] c = {
-			{0, 6, 1, 1},
-			{6, 0, 1, 1},
-			{1, 1, 0, 5},
-			{1, 1, 5, 0}
-	};
+	int[][] c ;
 	MPSolver solver;
 	MPVariable[][] X;
 
 	// intermediate data structure for subset generation
 	int[] b;// binary sequence representing subsets
 	HashSet<Integer> S = new HashSet<>();
+	private void readFile(){
+		try {
+			Scanner scanner = new Scanner(new File(".\\data\\TSP\\tsp-10.txt"));
+			N = scanner.nextInt() ;
+			c = new int[N][N] ;
+			for (int i = 0 ; i < N ; i ++ )
+				for (int j = 0 ; j < N ; j++){
+					c[i][j] = scanner.nextInt() ;
+				}
+		}catch (Exception e){
 
+		}
+	}
 	private void process(List<Integer> output) {
 		S.clear();
 		S.addAll(output);
@@ -160,8 +169,10 @@ public class TSP {
 		return  null ;
 	}
 	public static void main(String[] args) {
+
 		// TODO Auto-generated method stub
 		TSP app = new TSP();
+		app.readFile();
 		app.solve();
 	}
 
