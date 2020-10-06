@@ -15,6 +15,7 @@ distance_matrix = [
 n = len(distance_matrix)
 
 
+
 solver = pywraplp.Solver.CreateSolver("simple_mip_program", "CBC")
 
 variables = [
