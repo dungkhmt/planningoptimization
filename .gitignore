@@ -1,3 +1,12 @@
 /bin/
 /lib/
 /.classpath
+
+!src/
+
+src/*
+!src/class118133/
+
+src/class118133/*
+!src/class118133/nguyentrunghieu/*
+!src/class118133/pqd/*
