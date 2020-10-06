@@ -1,8 +1,10 @@
 package class118133.pqd;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Scanner;
 
 import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
@@ -99,11 +101,25 @@ public class TSP {
 			s = ns;
 		}
 	}
-
+	public void loadData(String fn){
+		try{
+			Scanner in = new Scanner(new File(fn));
+			N = in.nextInt();
+			c = new int[N][N];
+			for(int i = 0; i < N; i++)
+				for(int j = 0; j < N; j++)
+					c[i][j] = in.nextInt();
+			in.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	public void solve() {
 		System.out.println("solve start...");
-		genData("data/TSP/tsp-10.txt",10);
-		//if(true) return;
+		//genData("data/TSP/tsp-10.txt",10);
+		loadData("data/TSP/tsp-10.txt");
+		
 		
 		solver = new MPSolver("TSP solver",
 				MPSolver.OptimizationProblemType
