@@ -1,3 +1,4 @@
+
 package class118133.vutrungnghia;
 
 import com.google.ortools.linearsolver.MPConstraint;
@@ -57,6 +58,28 @@ public class TSP {
             }
         }
     }
+    private int findNext(int i) {
+        for (int j = 0; j < N; j++)
+            if (i != j) {
+                if (Math.abs(x[i][j].solutionValue() - 1) < 0.01)
+                    return j;
+            }
+        return -1;
+    }
+
+    public void printTour() {
+        int s = 0;
+        System.out.print(s);
+        while (true) {
+            int ns = findNext(s);
+            if (ns == -1)
+                break;
+            System.out.print(" -> " + ns);
+            if (ns == 0)
+                break;
+            s = ns;
+        }
+    }
     private void TRY(int k){
         for (int v = 0; v <= 1; v++){
             b[k] = v;
@@ -71,7 +94,7 @@ public class TSP {
 
     public  void solve(){
         System.out.println("solve start...");
-//        get_data();
+        get_data("data/TSP/tsp-10.txt");
         solver = new MPSolver("TSP solver", MPSolver.OptimizationProblemType.valueOf("CBC_MIXED_INTEGER_PROGRAMMING"));
         N = c.length;
 //        System.out.println(N);
@@ -122,6 +145,7 @@ public class TSP {
                 }
             }
         }
+        printTour();
     }
     public static void main(String[] args) {
         TSP app = new TSP();
