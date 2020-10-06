@@ -38,7 +38,7 @@ public class TSP_Dynamic {
 	
 	public void setFlowConstraint() {
 		solver = new MPSolver("TSP Solver", MPSolver.OptimizationProblemType.valueOf("CBC_MIXED_INTEGER_PROGRAMMING"));
-		getData("data/tsp-100.txt");
+		getData("data/TSP/tsp-100.txt");
 		
 		X = new MPVariable[N][N];
 		
@@ -108,7 +108,6 @@ public class TSP_Dynamic {
 					return false;
 				}
 
-//				addConstraint(subcycle);
 				history.add(subcycle);
 			}
 		}
