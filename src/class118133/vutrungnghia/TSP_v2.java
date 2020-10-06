@@ -140,6 +140,7 @@ public class TSP_v2 {
             System.out.println("STEP: " + counter);
             System.out.println("No.constraints: " + solver.numConstraints());
             stat = solver.solve();
+            System.out.println("Optimal solution: " + obj.value());
             ArrayList<HashSet<Integer>> subtours = extractSubtours();
             flag = (subtours.size() == 0);
             for(HashSet<Integer> h:subtours)
