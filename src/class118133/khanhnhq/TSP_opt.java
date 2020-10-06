@@ -9,7 +9,7 @@ import com.google.ortools.linearsolver.MPObjective;
 import com.google.ortools.linearsolver.MPSolver;
 import com.google.ortools.linearsolver.MPVariable;
 
-import Problem.TSP_opt;
+
 
 public class TSP_opt {
 	{
@@ -111,7 +111,7 @@ public class TSP_opt {
 	}
 	public void solve(){
 //		N = c.length;
-		loadData("src/Problem/tsp-50.txt");
+		loadData("src/data/TSP/tsp-50.txt");
 		System.out.println("solve start...");
 //		System.out.println(c[0][0]);
 		solver = new MPSolver("TSP solver", 
