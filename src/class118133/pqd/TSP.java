@@ -1,6 +1,7 @@
 package class118133.pqd;
 
 import java.util.HashSet;
+import java.util.Random;
 
 import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
@@ -11,6 +12,7 @@ public class TSP {
 	{
 		System.loadLibrary("jniortools");
 	}
+	Random R = new Random();
 	int N;
 	int[][] c = {
 			{0,6,1,1},
@@ -49,8 +51,35 @@ public class TSP {
 			}
 		}
 	}
+	public void genData(int N){
+		c = new int[N][N];
+		for(int i = 0; i < N; i++){
+			for(int j = 0; j < N; j++){
+				c[i][j] = R.nextInt(10) + 1;
+			}
+		}
+		
+	}
+	private int findNext(int i){
+		for(int j = 0; j < N; j++) if(i != j){
+			if(Math.abs(X[i][j].solutionValue() - 1) < 0.01) return j;
+		}
+		return -1;
+	} 
+	public void printTour(){
+		int s = 0;
+		System.out.print(s);
+		while(true){
+			int ns = findNext(s);
+			if(ns == -1) break;
+			System.out.print(" -> " + ns);
+			if(ns == 0)break;
+			s = ns; 
+		}
+	}
 	public void solve(){
 		System.out.println("solve start...");
+		genData(13);
 		
 		solver = new MPSolver("TSP solver", 
 				MPSolver.OptimizationProblemType.valueOf("CBC_MIXED_INTEGER_PROGRAMMING"));
@@ -96,6 +125,8 @@ public class TSP {
 				System.out.println("X[" + i + "," + j + "] = " + X[i][j].solutionValue());
 			}
 		}
+		
+		printTour();
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
