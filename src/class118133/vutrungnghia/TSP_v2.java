@@ -46,7 +46,6 @@ public class TSP_v2 {
     }
 
     private ArrayList<HashSet<Integer>> extractSubtours(){
-//        System.out.println("BBBBBBBBBBBBBBBBBBBB");
         ArrayList<HashSet<Integer>> result = new ArrayList<>();
         boolean[] mask = new boolean[N];
         for(int i = 0; i < N; ++i)
@@ -69,7 +68,7 @@ public class TSP_v2 {
             if (h.size() < N)
                 result.add(h);
         }
-        System.out.println(result.size());
+        System.out.println("No. sub tours: " + result.size());
         return result;
     }
 
@@ -79,6 +78,8 @@ public class TSP_v2 {
                 if (Math.abs(x[i][j].solutionValue() - 1) < 0.01)
                     return j;
             }
+        System.err.println(i +  " must belong to a tour!!!");
+        System.exit(1);
         return -1;
     }
 
@@ -134,13 +135,17 @@ public class TSP_v2 {
 
         MPSolver.ResultStatus stat;
         boolean flag = false;
+        int counter = 0;
         do{
-//            System.out.println("AAAAAAAAAAAAAAAA");
+            System.out.println("STEP: " + counter);
+            System.out.println("No.constraints: " + solver.numConstraints());
             stat = solver.solve();
             ArrayList<HashSet<Integer>> subtours = extractSubtours();
             flag = (subtours.size() == 0);
             for(HashSet<Integer> h:subtours)
                 addConstraints(h);
+            counter ++;
+            System.out.println("-----------------------------------");
         }while(!flag);
 
         if (stat != MPSolver.ResultStatus.OPTIMAL){
@@ -148,13 +153,6 @@ public class TSP_v2 {
             return;
         }
         System.out.println("Optimal solution: " + obj.value());
-//        for (int i = 0; i < N; ++i){
-//            for(int j = 0; j < N; ++j){
-//                if (i != j){
-//                    System.out.println("X[" + i + "," + j + "] = " + x[i][j].solutionValue());
-//                }
-//            }
-//        }
         printTour();
     }
     public static void main(String[] args) {
