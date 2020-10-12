@@ -2,6 +2,7 @@ package class118133.pqd;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -21,7 +22,8 @@ public class TSP {
 			{ 1, 1, 5, 0 } };
 	MPSolver solver;
 	MPVariable[][] X;
-
+	MPObjective obj ;
+	
 	// intermediate data structure for subset generation
 	int[] b;// binary sequence representing subsets
 	HashSet<Integer> S;
@@ -66,10 +68,12 @@ public class TSP {
 				}
 			}
 			out.println(N);
-			for(int i = 0; i < N; i++){
-				for(int j = 0; j < N; j++)if(i != j)
-					out.print(c[i][j] + " ");
-				else out.print(0 + " ");
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++)
+					if (i != j)
+						out.print(c[i][j] + " ");
+					else
+						out.print(0 + " ");
 				out.println();
 			}
 			out.close();
@@ -101,26 +105,122 @@ public class TSP {
 			s = ns;
 		}
 	}
-	public void loadData(String fn){
-		try{
+
+	public void loadData(String fn) {
+		try {
 			Scanner in = new Scanner(new File(fn));
 			N = in.nextInt();
 			c = new int[N][N];
-			for(int i = 0; i < N; i++)
-				for(int j = 0; j < N; j++)
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j < N; j++)
 					c[i][j] = in.nextInt();
 			in.close();
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public void createSolverDynSEC(HashSet<ArrayList<Integer>> C) {
+		solver = new MPSolver("TSP solver",
+				MPSolver.OptimizationProblemType
+						.valueOf("CBC_MIXED_INTEGER_PROGRAMMING"));
+
+		X = new MPVariable[N][N];
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
+				if (i != j) {
+					X[i][j] = solver.makeIntVar(0, 1, "X[" + i + "," + j + "]");
+				}
+
+		// flow balance
+		for (int i = 0; i < N; i++) {
+			MPConstraint c = solver.makeConstraint(1, 1);
+			for (int j = 0; j < N; j++)
+				if (i != j) {
+					c.setCoefficient(X[i][j], 1);
+				}
+
+			c = solver.makeConstraint(1, 1);
+			for (int j = 0; j < N; j++)
+				if (i != j) {
+					c.setCoefficient(X[j][i], 1);
+				}
+		}
+		
+		// SEC
+		for(ArrayList<Integer> S: C){
+			MPConstraint c = solver.makeConstraint(0,S.size() -1);
+			for(int i : S)
+				for(int j : S) if(i != j)
+					c.setCoefficient(X[i][j], 1);
+		}
+		
+		// objective
+		obj = solver.objective();
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
+				if (i != j)
+					obj.setCoefficient(X[i][j], c[i][j]);
+
+	}
+	private ArrayList<Integer> extractTour(int s){
+		int v = s;
+		ArrayList<Integer> T = new ArrayList<Integer>();
+		while(true){
+			T.add(v);
+			int nv = findNext(v); 
+			if(nv != s){
+				v = nv;
+			}else{
+				break;
+			}			
+		}
+		return T;
+	}
+	private String toString(ArrayList<Integer> T){
+		String s= "(";
+		for(int v: T)
+			s += v + " ";
+		return s + ")";
+	}
+	public void solveDynSEC(){
+		HashSet<ArrayList<Integer>> C = new HashSet<>();
+		boolean[] mark = new boolean[N];
+		
+		boolean found = false;
+		for(int it = 1; it <= 5000; it++){
+			createSolverDynSEC(C);
+			MPSolver.ResultStatus stat = solver.solve();
+			System.out.println("get obj = " + obj.value());
+			
+			//C.clear();
+			
+			// detect sub-tours
+			for(int i = 0; i < N; i++) mark[i] = false;
+			for(int s = 0; s < N; s++) if(!mark[s]){
+				ArrayList<Integer> ST = extractTour(s);
+				if(ST.size() == N){
+					System.out.println("FOUND optimal solution!! cost = " + obj.value() + " tour = " + toString(ST));
+					found = true;
+					break;
+				}else{
+					for(int v: ST){
+						mark[v] = true;						
+					}
+					C.add(ST);
+					System.out.println("sub-tour detected " + toString(ST));
+				}
+			}
+			if(found) break;
+		}
+	}
+		
 	public void solve() {
 		System.out.println("solve start...");
-		//genData("data/TSP/tsp-10.txt",10);
+		// genData("data/TSP/tsp-10.txt",10);
 		loadData("data/TSP/tsp-10.txt");
-		
-		
+
 		solver = new MPSolver("TSP solver",
 				MPSolver.OptimizationProblemType
 						.valueOf("CBC_MIXED_INTEGER_PROGRAMMING"));
@@ -180,7 +280,9 @@ public class TSP {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TSP app = new TSP();
-		app.solve();
+		app.loadData("data/TSP/tsp-100.txt");
+		//app.solve();
+		app.solveDynSEC();
 	}
 
 }
