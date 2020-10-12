@@ -17,8 +17,9 @@ def get_weight():
     try:
         with open(args.data_path, "r") as f:
             data = f.read().split("\n")
-            n = int(data[0])
-            weight_matrix = data[1:]
+        f.close()
+        n = int(data[0])
+        weight_matrix = data[1:]
         weight_matrix = [
             list(map(int, weight_matrix[i].split())) for i in range(n)
         ]
