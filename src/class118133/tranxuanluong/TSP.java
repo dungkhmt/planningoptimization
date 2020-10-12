@@ -1,18 +1,13 @@
 import com.google.ortools.linearsolver.*;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 
-// week 5
 public class TSP {
     static {
         System.loadLibrary("jniortools");
     }
 
-//    int cost[][] = {{0,3,1,1},{4,0,2,1},{1,2,0,6},{7,1,1,0}};
     int cost[][];
     int n = 10;
     int b[] = new int[n];
@@ -20,8 +15,6 @@ public class TSP {
     MPSolver solver = MPSolver.createSolver("TSP-Linear Programming ", String.valueOf(MPSolver.OptimizationProblemType.CBC_MIXED_INTEGER_PROGRAMMING));
     MPVariable[][] x = new MPVariable[n][n];
     Random random = new Random();
-
-
 
     public void solve() {
         System.out.println("Start solving ... ");
@@ -110,9 +103,6 @@ public class TSP {
             }
         }
     }
-
-    // optimal tour
-
     public void prinTour(){
         int current = 0;
         for (int i = 0; i< n; i++){
@@ -127,61 +117,9 @@ public class TSP {
         System.out.println(0);
     }
 
-
-
     public  static  void main(String args[]) {
         TSP tsp = new TSP();
         tsp.solve();
-
-
-
-
-
-        // constraint khong ton tai chu trinh con
-
-//        for ( int i = 0 ; i < Math.pow(2,n) ; i++){
-//            int temp = i ;
-//            String s = Integer.toBinaryString(i);
-//            int add = n - s.length();
-//            for (int addTop = 0; addTop < add; addTop ++){
-//                s = "0" + s;
-//            }
-//            List<Integer> subGroup = new ArrayList<Integer>();
-//            for(int j = 0; j < n; j++) {
-//                if (s.charAt(j) == '1') {
-//                    subGroup.add(j);
-//                }
-//            }
-//            int len = subGroup.size();
-//            //MPVariable tempp = new MPVariable();
-//            int summ = 0;
-//            `
-//            for (int p = 0; p < len ; p++){
-//                for (int q = p + 1; q < len; q++){
-//                    summ += x[subGroup.get(p)][subGroup.get(q)];
-//
-//                }
-//            }
-//        }
-
-        // SEC using backstracking
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 }
-
