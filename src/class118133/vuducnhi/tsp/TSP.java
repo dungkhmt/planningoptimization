@@ -11,18 +11,13 @@ public class TSP {
         System.loadLibrary("jniortools");
     }
     int N;
-    int[][] c = {
-        {0, 6, 1, 1},
-        {6, 0, 1, 1},
-        {1, 1, 0, 5},
-        {1, 1, 5, 0}
-    };
+    int[][] cost;
     MPSolver solver;
     MPVariable[][] X;
     int[] b;
-    HashSet<Integer> S;
+
     private void process() {
-        S.clear();
+        HashSet<Integer> S = new HashSet<Integer>();
         for (int i = 0; i < N; ++i) {
             if (b[i] == 1) {
                 S.add(i);
@@ -51,7 +46,7 @@ public class TSP {
     }
     public void solve() {
         solver = new MPSolver("TSP solver", MPSolver.OptimizationProblemType.CBC_MIXED_INTEGER_PROGRAMMING);
-        N = c.length;
+        N = cost.length;
         X = new MPVariable[N][N];
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < N; ++j) {
@@ -75,13 +70,12 @@ public class TSP {
             }
         }
         b = new int[N];
-        S = new HashSet<Integer>();
         backtrack(0);
         MPObjective obj = solver.objective();
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < N; ++j) {
                 if (i != j) {
-                    obj.setCoefficient(X[i][j], c[i][j]);
+                    obj.setCoefficient(X[i][j], cost[i][j]);
                 }
             }
         }
@@ -100,6 +94,8 @@ public class TSP {
     }
     public static void main(String[] args) {
         TSP app = new TSP();
+        DataReader dataReader = new DataReader(10);
+        app.cost = dataReader.readCostFromDataFile();
         app.solve();
     }
 }
