@@ -1,5 +1,5 @@
 
-package class118133.vutrungnghia;
+package class118133.vutrungnghia.tsp;
 
 import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
