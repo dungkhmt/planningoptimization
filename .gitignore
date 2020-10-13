@@ -3,5 +3,6 @@
 /out/
 /.classpath
 /.project
-/.idea/
+.idea/
 /planningoptimization.iml
+out/
