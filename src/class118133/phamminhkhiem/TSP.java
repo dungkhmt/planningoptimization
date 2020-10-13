@@ -109,8 +109,12 @@ public class TSP {
 			}
 			List<Integer> output = extractChuTrinh(X);
 			if (output != null ){
+				System.out.println("Add new constrain !!");
 				process(output);
-			} else return;
+			} else {
+//				System.out.println("Optimal :" + obj.value());
+				return;
+			}
 
 		}
 
@@ -142,6 +146,7 @@ public class TSP {
 			for (int i = 0; i < N; i++)
 				if (i != u && X[u][i].solutionValue() == 1) {
 					luu[++sum] = i;
+//					System.out.println("check"+ u+' '+ i+' ' +c[u][i]);
 					u = i;
 					if (sum == N - 1) break;
 					if (!fre[i]) {
@@ -163,6 +168,7 @@ public class TSP {
 //			System.out.println(i);
 //		}
 
+		System.out.println("obj: " + solver.objective().value());
 		for (int i : luu) {
 			System.out.print(i + "--> ");
 		}
