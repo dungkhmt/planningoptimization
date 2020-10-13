@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="file://$APPLICATION_HOME_DIR$/or-tools_VisualStudio2019-64bit_v7.8.7959/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$APPLICATION_HOME_DIR$/or-tools_VisualStudio2019-64bit_v7.8.7959/lib" />
+    </NATIVE>
+    <SOURCES />
+    <jarDirectory url="file://$APPLICATION_HOME_DIR$/or-tools_VisualStudio2019-64bit_v7.8.7959/lib" recursive="false" />
+  </library>
+</component>

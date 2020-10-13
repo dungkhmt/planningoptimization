@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="71ef1296-4bfd-4279-bb5a-418d8ed26c1a" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1iTwVHh0n4wRsHqdBfChF3wpx92" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/or-tools_VisualStudio2019-64bit_v7.8.7959/lib" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\planningoptimization\src\class118133" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.CSP">
+    <configuration name="CSP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="class118133.trandinhhung.csp.CSP" />
+      <module name="planningoptimization" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TSP (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="class118133.trandinhhung.TSP" />
+      <module name="planningoptimization" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TSP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="class118133.pqd.TSP" />
+      <module name="planningoptimization" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TSP_hung" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="class118133.trandinhhung.tsp.TSP_hung" />
+      <module name="planningoptimization" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CSP" />
+        <item itemvalue="Application.TSP_hung" />
+        <item itemvalue="Application.TSP (1)" />
+        <item itemvalue="Application.TSP" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="WindowStateProjectService">
+    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601945251296">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1601945251296" />
+    <state x="389" y="110" key="FileChooserDialogImpl" timestamp="1601945137664">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="389" y="110" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1601945137664" />
+    <state width="1345" height="156" key="GridCell.Tab.0.bottom" timestamp="1601954235363">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="156" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1601954235363" />
+    <state width="1345" height="156" key="GridCell.Tab.0.center" timestamp="1601954235363">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="156" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1601954235363" />
+    <state width="1345" height="156" key="GridCell.Tab.0.left" timestamp="1601954235363">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="156" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1601954235363" />
+    <state width="1345" height="156" key="GridCell.Tab.0.right" timestamp="1601954235363">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="156" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1601954235363" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1601945141053">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1601945141053" />
+    <state x="405" y="280" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1601944950958">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="405" y="280" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1366.738@0.0.1366.738" timestamp="1601944950958" />
+  </component>
+</project>

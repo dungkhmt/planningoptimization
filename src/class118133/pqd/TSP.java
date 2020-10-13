@@ -118,7 +118,7 @@ public class TSP {
 	public void solve() {
 		System.out.println("solve start...");
 		//genData("data/TSP/tsp-10.txt",10);
-		loadData("data/TSP/tsp-10.txt");
+		loadData("data/TSP/tsp-13.txt");
 		
 		
 		solver = new MPSolver("TSP solver",
