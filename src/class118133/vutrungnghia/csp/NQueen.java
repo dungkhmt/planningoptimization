@@ -5,7 +5,6 @@ import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.variables.IntVar;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class NQueen {
