@@ -118,17 +118,7 @@ public class TSP {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-	public void solve() {
-		System.out.println("solve start...");
-		//genData("data/TSP/tsp-10.txt",10);
-		loadData("data/TSP/tsp-13.txt");
-		
-		
-=======
-
 	public void createSolverDynSEC(HashSet<ArrayList<Integer>> C) {
->>>>>>> c0a26da57a3e8efef0f0d533eff67648237689b2
 		solver = new MPSolver("TSP solver",
 				MPSolver.OptimizationProblemType
 						.valueOf("CBC_MIXED_INTEGER_PROGRAMMING"));
