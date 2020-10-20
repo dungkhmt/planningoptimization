@@ -1,9 +1,12 @@
 package class118133.vuducnhi.heuristic;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Example {
     static int findBetterPosition(int[] state, int worstIndex) {
-        int result = worstIndex;
         int bestCovered = calculateCellWillBeCoverBy(state, worstIndex);
+        ArrayList<Integer> candidate = new ArrayList<Integer>();
         for (int i = 0; i < state.length; ++i) {
             if (i == worstIndex) continue;
             int temp = state[worstIndex];
@@ -11,11 +14,15 @@ public class Example {
             int currentCovered = calculateCellWillBeCoverBy(state, worstIndex);
             if (currentCovered < bestCovered) {
                 bestCovered = currentCovered;
-                result = i;
+                candidate.clear();
+            }
+            if (currentCovered == bestCovered) {
+                candidate.add(i);
             }
             state[worstIndex] = temp;
         }
-        return result;
+        Random random = new Random();
+        return candidate.get(random.nextInt(candidate.size()));
     }
 
     static int calculateCellWillBeCoverBy(int[] state, int currentIndex) {
@@ -35,18 +42,24 @@ public class Example {
         }
         System.out.println();
     }
-    
+
     static int improveSolution(int[] state, int lastImprovedIndex) {
         int worstValue = 0;
         int worstIndex = -1;
+        ArrayList<Integer> candidate = new ArrayList<Integer>();
         for (int i = 0; i < state.length; ++i) {
             if (i == lastImprovedIndex) continue;
             int countInvalidCells = calculateCellWillBeCoverBy(state, i);
             if (countInvalidCells > worstValue) {
                 worstValue = countInvalidCells;
-                worstIndex = i;
+                candidate.clear();
+            }
+            if (countInvalidCells == worstValue && i != lastImprovedIndex) {
+                candidate.add(i);
             }
         }
+        Random random = new Random();
+        worstIndex = candidate.get(random.nextInt(candidate.size()));
         int newPosition = findBetterPosition(state, worstIndex);
         state[worstIndex] = newPosition;
 
@@ -66,7 +79,7 @@ public class Example {
     }
 
     public static void main(String[] args) {
-        int N = 8;
+        int N = 100;
         int[] currentState = new int[N];
         for (int i = 0; i < N; ++i) {
             currentState[i] = 0;
