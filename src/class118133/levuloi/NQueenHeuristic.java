@@ -3,7 +3,7 @@ package class118133.levuloi;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class NQueen_Greedy {
+public class NQueenHeuristic {
 	private int N;
 	private int[] errorSignal;
 	private int[] pos;
@@ -120,7 +120,7 @@ public class NQueen_Greedy {
 	}
 	
 	public static void main(String[] args) {
-		NQueen_Greedy ins = new NQueen_Greedy();
+		NQueenHeuristic ins = new NQueenHeuristic();
 		ins.init();
 		ins.iterative();
 	}
