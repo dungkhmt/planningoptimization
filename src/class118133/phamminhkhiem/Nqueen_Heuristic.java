@@ -3,7 +3,7 @@ package class118133.phamminhkhiem;
 import java.util.Random;
 
 public class Nqueen_Heuristic {
-    public static int N = 10 ;
+    public static int N = 200 ;
     public static int[] cot = new int[N];
     public static Random random = new Random();
     public static int[] columm_count = new int[N];
@@ -50,8 +50,16 @@ public class Nqueen_Heuristic {
             max_pos = pos[random.nextInt(num+1)] ;
             if (max <=3 ){
                 System.out.println("Solution Found !! ");
-                for (int i = 0 ; i <N ; i++)
-                System.out.print(cot[i] + "_");
+                for (int i = 0; i < N; i++) {
+                    System.out.print(cot[i] + "_>");
+//                    for (int j = 1; j <= N; j++) {
+//                        if (cot[i] == j)
+//                            System.out.print(1 + " ");
+//                        else System.out.print(0 + " ");
+//                    }
+//                    System.out.println("\n");
+                }
+
                 break;
             }
 
