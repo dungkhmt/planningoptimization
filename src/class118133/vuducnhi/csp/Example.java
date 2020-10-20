@@ -3,7 +3,7 @@ package class118133.vuducnhi.csp;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
 
-public class Main {
+public class Example {
     public static void main(String[] args) {
         Model model = new Model("example");
         IntVar[] X = new IntVar[5];
