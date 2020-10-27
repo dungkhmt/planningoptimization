@@ -1,7 +1,10 @@
 /bin/
 /lib/
+/out/
 /.classpath
 /.project
 .idea/
 /planningoptimization.iml
 out/
+/*.iml
+

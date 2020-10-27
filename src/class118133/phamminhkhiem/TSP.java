@@ -26,7 +26,7 @@ public class TSP {
 	HashSet<Integer> S = new HashSet<>();
 	private void readFile(){
 		try {
-			Scanner scanner = new Scanner(new File(".\\data\\TSP\\tsp-10.txt"));
+			Scanner scanner = new Scanner(new File(".\\data\\TSP\\tsp-50.txt"));
 			N = scanner.nextInt() ;
 			c = new int[N][N] ;
 			for (int i = 0 ; i < N ; i ++ )
@@ -109,12 +109,8 @@ public class TSP {
 			}
 			List<Integer> output = extractChuTrinh(X);
 			if (output != null ){
-				System.out.println("Add new constrain !!");
 				process(output);
-			} else {
-//				System.out.println("Optimal :" + obj.value());
-				return;
-			}
+			} else return;
 
 		}
 
@@ -146,7 +142,6 @@ public class TSP {
 			for (int i = 0; i < N; i++)
 				if (i != u && X[u][i].solutionValue() == 1) {
 					luu[++sum] = i;
-//					System.out.println("check"+ u+' '+ i+' ' +c[u][i]);
 					u = i;
 					if (sum == N - 1) break;
 					if (!fre[i]) {
@@ -167,8 +162,7 @@ public class TSP {
 //		for (int i : output) {
 //			System.out.println(i);
 //		}
-
-		System.out.println("obj: " + solver.objective().value());
+		System.out.println("obj: " + solver.objective().value() );
 		for (int i : luu) {
 			System.out.print(i + "--> ");
 		}

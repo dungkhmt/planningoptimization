@@ -1,4 +1,4 @@
-package class118133.nguyenvanchuc
+package class118133.nguyenvanchuc;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
 
