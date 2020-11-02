@@ -5,6 +5,41 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "CodeLens (Launch) - NQueenUseLib",
+            "request": "launch",
+            "mainClass": "levuloi.NQueenUseLib",
+            "projectName": "planningoptimization"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - bcta",
+            "request": "launch",
+            "mainClass": "bcta",
+            "projectName": "nguyenmaiphuongjava (2)"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - bcta",
+            "request": "launch",
+            "mainClass": "nguyenmaiphuongjava.bcta",
+            "projectName": "planningoptimization"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - bcta",
+            "request": "launch",
+            "mainClass": "bcta",
+            "projectName": "planningoptimization"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - bcta",
+            "request": "launch",
+            "mainClass": "bcta",
+            "projectName": "planningoptimization_bb94ce4"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
