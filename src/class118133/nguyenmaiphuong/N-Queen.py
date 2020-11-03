@@ -1,6 +1,5 @@
 from __future__ import print_function
 import sys
-from ortools.linear_solver.pywraplp import Solver
 from ortools.sat.python import cp_model
 
 def main(board_size):
@@ -21,6 +20,7 @@ def main(board_size):
       diag2.append(q2)
       model.Add(q2 == queens[j] - j)
 
+    print(diag1)
     model.AddAllDifferent(diag1)
     model.AddAllDifferent(diag2)
 
@@ -34,5 +34,5 @@ def main(board_size):
 
 if __name__ == '__main__':
   # By default, solve the 8x8 problem.
-  board_size = 6
+  board_size = 200
   main(board_size)

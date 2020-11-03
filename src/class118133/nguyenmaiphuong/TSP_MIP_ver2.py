@@ -1,33 +1,40 @@
 from __future__ import print_function
+import string
 import numbers
+import time
 from os import getenvb
 from time import sleep
 
+
 from ortools.linear_solver import pywraplp
-from ortools.linear_solver.pywraplp import Objective
+from ortools.linear_solver.pywraplp import Objective, Solver
 
 def create_data_model():
-    data = {}
+    try:
+        f = open("./data/TSP/tsp-100.txt")
 
-    data['number_of_cities'] = 10
-    data['distances'] = [
-        [0, 6, 2, 8, 8, 7, 4, 1, 1, 5],
-        [3, 0, 4, 10, 8, 10, 7, 6, 2, 7],
-        [10, 7, 0, 10, 9, 4, 7, 2, 8, 6],
-        [7, 4, 4, 0, 4, 3, 3, 7, 8, 5], 
-        [8, 2, 10, 2, 0, 7, 10, 2, 2, 4], 
-        [3, 10, 3, 2, 4, 0, 1, 2, 4, 7], 
-        [6, 5, 9, 7, 6, 1, 0, 2, 4, 7], 
-        [7, 8, 9, 2, 4, 3, 8, 0, 9, 1], 
-        [3, 4, 6, 8, 7, 9, 4, 6, 0, 3], 
-        [8, 8, 6, 4, 5, 3, 3, 5, 1, 0], 
-    ]
+        data = {}
+        a = f.readline()
+
+        data['number_of_cities'] = int(a)
+        data['distances'] = []
+        for i in range(data['number_of_cities']):
+            data['distances'].append([])
+            
+            s = f.readline()
+            s = s.split(' ')
+
+            for j in (s):
+                if(j.isdigit()):
+                    data['distances'][i].append(int(j))
+    finally:
+        f.close()
 
     return data
 
 def main():
     data = create_data_model()
-    
+
     solver = pywraplp.Solver.CreateSolver('TSP', 'CBC')
     
     #create variables
@@ -35,7 +42,10 @@ def main():
     for i in range (data['number_of_cities']):
         x.append([])
         for j in range (data['number_of_cities']):
-            x[i].append(solver.IntVar(0, 1, 'x_%i_%i' % (i, j)))
+            if i == j:
+                x[i].append(solver.IntVar(0, 0, 'x_%i_%i' % (i, j)))
+            else:
+                x[i].append(solver.IntVar(0, 1, 'x_%i_%i' % (i, j)))
     
     #set objective
     objective = solver.Objective()
@@ -53,9 +63,9 @@ def main():
     for j in range (data['number_of_cities']):
         constraint = solver.Constraint(1, 1)
         for i in range (data['number_of_cities']):
-            constraint.SetCoefficient(x[i][j], 1)
+            constraint.SetCoefficient(x[j][i], 1)
 
-    #eliminate SEC
+    '''#eliminate SEC
     generatorSEC = GeneratorSEC(data['number_of_cities'])
     
     while generatorSEC.size < data['number_of_cities']:
@@ -67,30 +77,78 @@ def main():
                 if generatorSEC.SEC[i] != 0:
                     for j in range (data['number_of_cities']):
                         if generatorSEC.SEC[j] != 0:
-                            constraint.SetCoefficient(x[i][j], 1)
+                            constraint.SetCoefficient(x[i][j], 1)'''
 
-    status = solver.Solve()
+    solution = []
+    SEC = []
+    count = 1
+    cur = 0
+    #Add SEC constraint
+    while(1):
+        status = solver.Solve()
+        
+        solution.clear()
+        SEC.clear()
     
-    print('Objective value: ', solver.Objective().Value())
-    print('Solution: 0', end=' ')
+        #print('Objective value: ', solver.Objective().Value())
+        #print('Solution: 0', end=' ')
+
+        count = 1
+        cur = 0
+        solution.append(cur)
+        while(count < data['number_of_cities']):
+            for i in range (data['number_of_cities']):
+                if(x[cur][i].solution_value() == 1):
+                    #print(i, end=' ')
+                    cur = i
+                    solution.append(cur)
+                    break
+        
+            count = count + 1
+
+        #print() 
+
+        #for i in range (data['number_of_cities']):
+        #    for j in range (data['number_of_cities']):
+        #        print('%i' %x[i][j].solution_value(), end = ' ')
+        #    print()
+        
+        #print() 
+
+        if(exist_SEC_constraint(solution, SEC) == False):
+            break
+        else:
+            constraint = solver.Constraint(0, len(SEC) - 1)
+            for p in SEC:
+                for q in SEC:
+                    constraint.SetCoefficient(x[p][q], 1)
+
+    #status = solver.Solve()
 
     count = 1
     cur = 0
+    solution.append(cur)
+    print('Objective value: ', solver.Objective().Value())
+    print('Solution: 0', end=' ')
     while(count < data['number_of_cities']):
         for i in range (data['number_of_cities']):
             if(x[cur][i].solution_value() == 1):
                 print(i, end=' ')
                 cur = i
+                solution.append(cur)
                 break
         
         count = count + 1
 
-    print()
+    print() 
 
     for i in range (data['number_of_cities']):
         for j in range (data['number_of_cities']):
             print('%i' %x[i][j].solution_value(), end = ' ')
         print()
+        
+    print() 
+
 
 class GeneratorSEC():
     SEC = []
@@ -117,5 +175,21 @@ class GeneratorSEC():
         
         return self.SEC
 
+def exist_SEC_constraint(solution, SEC):
+    mark = [-1] * len(solution)
+    for i in range (len(solution)):
+        if(mark[solution[i]] != -1):
+            j = i
+            while(mark[solution[i]] != j):
+                j -= 1
+                SEC.append(solution[j])
+            return True
+        
+        mark[solution[i]] = i
+
+    return False
+
 if __name__ == '__main__':
+    start_time = time.time()
     main()
+    print("--- %s seconds ---" % (time.time() - start_time))

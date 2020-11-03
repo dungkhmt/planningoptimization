@@ -1,11 +1,10 @@
-package class118133.caophuongnam;
+package class118133.tranthiuyen;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
 
-public class Example {
-
-    public static void main(String[] args) {
+public class CP {
+    public void solve(){
         Model model = new Model("Example");
         IntVar[] X = new IntVar[5];
         for(int i = 0; i < 5; i++)
@@ -19,8 +18,16 @@ public class Example {
         model.ifThen(model.arithm(X[2], "=", 1), model.arithm(X[4], "!=", 2));
 
         model.getSolver().solve();
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 5; i++)
             System.out.println(X[i]);
-        }
     }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        CP app = new CP();
+//        app.loadData("data/TSP/tsp-100.txt");
+        app.solve();
+//        app.solveDynSEC();
+    }
+
 }

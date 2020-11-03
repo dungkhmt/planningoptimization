@@ -1,8 +1,10 @@
 /bin/
 /lib/
-/out/
+out/
 /.classpath
 /.project
 .idea/
 /planningoptimization.iml
-out/
+out/production/
+/*.iml
+*.class
