@@ -39,14 +39,6 @@ public class Sudoku {
             }
         }
 
-        for (int i = 0; i < 9; ++i) {
-            VarIntLS[] Y = new VarIntLS[9];
-            for (int j = 0; j < 9; ++j) {
-                Y[j] = X[i][j];
-            }
-            constraintSystem.post(new AllDifferent(Y));
-        }
-
         for (int j = 0; j < 9; ++j) {
             VarIntLS[] Y = new VarIntLS[9];
             for (int i = 0; i < 9; ++i) {
@@ -96,10 +88,18 @@ public class Sudoku {
             Move moveInfo = candidates.get(random.nextInt(candidates.size()));
             X[moveInfo.row][moveInfo.firstCol].swapValuePropagate(X[moveInfo.row][moveInfo.secondCol]);
         }
+    }
 
+    public void printSudokuBoard() {
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
-                System.out.println(X[i][j].getValue() + " ");
+                System.out.print(X[i][j].getValue() + " " + (j == 2 || j == 5 ? "| " : ""));
+            }
+            System.out.println();
+            if (i % 3 == 2) {
+                for (int j = 0; j < 11; ++j) {
+                    System.out.print("- ");
+                }
                 System.out.println();
             }
         }
@@ -110,5 +110,6 @@ public class Sudoku {
         solver.initialize();
         solver.defineConstraints();
         solver.solve();
+        solver.printSudokuBoard();
     }
 }
