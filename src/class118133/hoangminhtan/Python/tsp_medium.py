@@ -6,6 +6,7 @@ import os
 import queue
 from itertools import combinations, permutations
 from ortools.linear_solver import pywraplp
+import time
 
 weighted_matrix = [[0, 6, 1, 1],
                        [6, 0, 1, 1],
@@ -142,5 +143,6 @@ data_dir = '../../.././data/TSP'
 # data_dir = 'TSP'
 for i in os.listdir(data_dir):
     weighted_matrix = load_data(os.path.join(data_dir, i))
+    start = time.time()
     objective, sol = main(weighted_matrix)
-    print('File : {},\t\tObjective Value: {}\nSolution: {}\n'.format(i, objective, get_tour(sol, 0)))
+    print('File : {},\t\tObjective Value: {} \nTime: {} \nSolution: {}\n'.format(i, objective, time.time()-start, get_tour(sol, 0)))
