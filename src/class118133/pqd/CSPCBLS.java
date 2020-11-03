@@ -51,6 +51,11 @@ public class CSPCBLS {
 			this.i = i; this.value = value;
 		}
 	}
+	public void hillClimbing(){
+		GenericHillClimbingSearch searcher = new GenericHillClimbingSearch();
+		searcher.search(S, 100000, 10000);
+	}
+	
 	public void localSearch(){
 		System.out.println("Init S.violations = " + S.violations());
 		Random R = new Random();
@@ -88,7 +93,8 @@ public class CSPCBLS {
 		// TODO Auto-generated method stub
 		CSPCBLS app =new CSPCBLS();
 		app.stateModel();
-		app.localSearch();
+		//app.localSearch();
+		app.hillClimbing();
 	}
 
 }
