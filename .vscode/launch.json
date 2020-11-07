@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Nqueen",
+            "request": "launch",
+            "mainClass": "class118133.nguyenmaiphuongjava.Nqueen",
+            "projectName": "planningoptimization_bb94ce4"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - bcta",
             "request": "launch",
             "mainClass": "class118133.nguyenmaiphuongjava.bcta",
