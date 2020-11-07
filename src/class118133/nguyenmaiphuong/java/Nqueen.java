@@ -1,17 +1,11 @@
 package class118133.nguyenmaiphuong.java;
 
 import localsearch.constraints.alldifferent.AllDifferent;
-import localsearch.constraints.basic.LessOrEqual;
-import localsearch.constraints.basic.NotEqual;
 import localsearch.functions.basic.FuncPlus;
-import localsearch.functions.conditionalsum.ConditionalSum;
-import localsearch.functions.max_min.Min;
 import localsearch.model.ConstraintSystem;
-import localsearch.model.IConstraint;
 import localsearch.model.IFunction;
 import localsearch.model.LocalSearchManager;
 import localsearch.model.VarIntLS;
-import localsearch.search.HillClimbing;
 import localsearch.selectors.MinMaxSelector;
 
 public class Nqueen {
