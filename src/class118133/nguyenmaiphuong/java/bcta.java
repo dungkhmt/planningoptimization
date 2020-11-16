@@ -1,4 +1,4 @@
-package class118133.nguyenmaiphuongjava;
+package class118133.nguyenmaiphuong.java;
 
 import localsearch.constraints.basic.LessOrEqual;
 import localsearch.constraints.basic.NotEqual;
@@ -10,7 +10,6 @@ import localsearch.model.IFunction;
 import localsearch.model.LocalSearchManager;
 import localsearch.model.VarIntLS;
 import localsearch.search.HillClimbing;
-import sun.tools.tree.EqualExpression;
 
 public class bcta {
         int numClass = 13, numTeacher = 3;
@@ -82,7 +81,7 @@ public class bcta {
         {
             System.out.print("Teacher " + i + ": ");
             for(int j = 0; j< numClass; j++)
-                if(x[j].getOldValue() == i)
+                if(x[j].getValue() == i)
                     System.out.print(j + " ");
             
             System.out.println();
