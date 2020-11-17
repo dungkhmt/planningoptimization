@@ -53,6 +53,7 @@ def build_model(data):
                     or (o[i] == 1 and o_w_i == li[i]))
         model.Add(  (o[i] == 0 and o_l_i == li[i])
                     or (o[i] == 1 and o_l_i == wi[i]))
+                    
 
         variables.append(x[i])
         variables.append(y[i])
