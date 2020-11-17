@@ -17,7 +17,7 @@ public class SudokoHillClimbing {
         VarIntLS[][] X= new VarIntLS[N][N];
         for(int i = 0; i < N; i++)
             for(int j =0; j < N; j++) {
-                X[i][j] = new VarIntLS(mgr, 1, N);
+                X[i][j] = new VarIntLS(mgr, 0, N-1);
             }
 
         for(int i = 0; i < N; i++)
