@@ -7,6 +7,7 @@ import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.solver.variables.IntVar;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,8 +21,8 @@ public class binPackingChoco {
 
     public void loadData() {
         try {
-            Scanner in = new Scanner("C:\\Users\\trung\\IdeaProjects\\optimizeProb\\data\\BinPacking2D\\bin-packing-2D.txt");
-            FileReader fr = new FileReader("C:\\Users\\trung\\IdeaProjects\\optimizeProb\\data\\BinPacking2D\\bin-packing-2D.txt");
+            File file = new File("C:\\Users\\trung\\IdeaProjects\\optimizeProb\\data\\BinPacking2D\\bin-packing-2D-W10-H7-I6.txt");
+            Scanner in = new Scanner(file);
             W = in.nextInt();
             H = in.nextInt();
             while (true) {
