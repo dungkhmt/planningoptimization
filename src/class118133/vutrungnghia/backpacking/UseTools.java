@@ -121,7 +121,7 @@ public class UseTools {
         for (int i = 0; i < N; ++i) {
             System.out.println("Box: " + i);
             System.out.println("X: " + X[i].getValue() + ",Y: " + Y[i].getValue());
-            System.out.println("F:" + F[i]);
+            System.out.println("F: " + F[i].getValue());
             System.out.println("w: " + Boxes[i].w + ",l: " + Boxes[i].l);
             System.out.println("----------------------------------------------");
         }
