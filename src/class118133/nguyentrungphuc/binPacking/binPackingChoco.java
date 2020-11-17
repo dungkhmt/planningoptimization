@@ -1,6 +1,5 @@
 package code;
 
-
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.Solver;
@@ -42,10 +41,10 @@ public class binPackingChoco {
         binPackingChoco ins = new binPackingChoco();
         ins.loadData();
 
-        for (int i = 0; i < N; i++) {
-            System.out.println(w[i] + " ");
-            System.out.println(h[i] + " ");
-        }
+//        for (int i = 0; i < N; i++) {
+//            System.out.println(w[i] + " ");
+//            System.out.println(h[i] + " ");
+//        }
 
         Model model = new Model("BinPacking-Choco-solver");
         IntVar[] x = model.intVarArray("x", N, 0, W);
@@ -65,8 +64,12 @@ public class binPackingChoco {
                 (o[i].eq(1).and(o[j].eq(1))).imp(x[i].add(h[i]).le(x[j]).or(x[j].add(h[j]).le(x[i])).or(y[i].add(w[i]).le(y[j]).or(y[j].add(w[j]).le(y[i])))).post();
             }
         }
+
         Solver solver = model.getSolver();
         Solution solution = solver.findSolution();
-        System.out.println(solution.toString());
+
+        for(int i=0;i<N;i++){
+            System.out.println("x["+i+"] = "+ x[i].getValue() + "; y["+i+"] = "+y[i].getValue());
+        }
     }
 }
