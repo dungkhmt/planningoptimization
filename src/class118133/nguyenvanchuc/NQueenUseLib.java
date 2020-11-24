@@ -1,4 +1,4 @@
-package class118133.levuloi;
+package class118133.nguyenvanchuc;
 
 import localsearch.constraints.alldifferent.AllDifferent;
 import localsearch.functions.basic.FuncPlus;

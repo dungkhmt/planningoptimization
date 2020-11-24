@@ -101,7 +101,7 @@ public class NQueenHeuristic_2 {
 
         //bat dau qua trinh lap toi uu
         for (int z=0; z<1000000; z++){
-            System.out.println("--------------------------------------");
+            System.out.println("........................................................");
             System.out.println("Day la vong lap thu "+ (z+1));
             banco.inBanCo();//ket qua ban co
 
