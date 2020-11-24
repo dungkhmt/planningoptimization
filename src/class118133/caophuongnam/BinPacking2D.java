@@ -1,4 +1,4 @@
-package test;
+package class118133.caophuongnam;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
