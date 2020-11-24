@@ -20,7 +20,7 @@ public class TSP_1dArray {
 	private void readFile() {
 		String content = null;
 		try {
-			byte[] bytes = Files.readAllBytes(Paths.get("data/TSP/tsp-5.txt"));
+			byte[] bytes = Files.readAllBytes(Paths.get("data/TSP/tsp-10.txt"));
 			content = new String(bytes, StandardCharsets.UTF_8);
 		}
 		catch (IOException e) {
@@ -88,7 +88,9 @@ public class TSP_1dArray {
 	
 	public void solve() {
 		Solver solver = model.getSolver();
-		solver.solve();
+		while (solver.solve()) {
+			System.out.println("Objective = " + Y[N].getValue());
+		}
 	}
 	
 	public void printResult() {
