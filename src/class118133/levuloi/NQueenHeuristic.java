@@ -10,7 +10,7 @@ public class NQueenHeuristic {
 	private Random rd = new Random();
 	
 	public void init() {
-		N = 300;
+		N = 200;
 		pos = new int[N];
 		errorSignal = new int[N];
 		for (int i = 0; i < N; i++) {
