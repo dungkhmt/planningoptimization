@@ -1,7 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+package chocosolver;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -9,106 +8,103 @@ import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.expression.discrete.relational.ReExpression;
 import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.solver.variables.IntVar;
-import org.chocosolver.util.tools.ArrayUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Main {
+public class ChocoSolver {
     private int half_day_period;
     private int n_day;
+    private Model model;
+    private Solver solver;
+    private JSONObject data;
 
-    public Main() {
+
+
+    public ChocoSolver() {
         this.half_day_period = 0;
         this.n_day = 0;
     }
 
-    public static void main(String[] args) {
-        String fn = "data.txt";
-
-        Main app = new Main();
-
-        app.half_day_period = 6;
-        app.n_day = 6;
-
-        JSONObject data = app.read_data(fn);
-        System.out.println(data.toJSONString());
-        
-        app.solve(data);
+    public ChocoSolver(int half_day_period, int n_day) {
+        this.half_day_period = half_day_period;
+        this.n_day = n_day;
     }
 
-    public void solve(JSONObject data) {
-        Model model = this.build_model(data);
+    public int solve(JSONObject data) {
+        this.data = data;
+        model = this.build_model(data);
         System.out.println("Build model done!");
 
-        Solver solver = model.getSolver();
+        solver = model.getSolver();
         System.out.println("Get solver done!");
 
-
-        Solution solution = new Solution(model);
-
-
-        if(solver.solve()){
-            System.out.println("Find a solution");
-            solution.record();
-            String solution_str = solution.toString();
-            solution_str = solution_str.substring(10);
-            String[] abc = solution_str.split(",");
-
-            int cnt = 0;
-            int class_id = 0;
-            JSONArray class_subject = (JSONArray)((JSONArray) data.get("CLASS_NEED")).get(class_id);
-            System.out.println(String.format("Lớp %d:", class_id+1));
-            int _N = (int) data.get("N_CLASS");
-            for (String s : abc) 
-            if (    s.contains("class_subject_to_teacher") 
-                    || s.contains("class_subject_start")
-                    || s.contains("class_subject_end")){
-                int sub_id = cnt/3;
-                ++cnt;
-                if (cnt%3 == 1) {
-                    String[] tmp = s.split("=");
-                    int t = Integer.parseInt(tmp[1]);
-                    System.out.print(String.format("\tGiáo viên %d dạy môn %d ", t, (int)class_subject.get(sub_id)));
-                }
-                else if (cnt%3 == 2) {
-                    String[] tmp = s.split("=");
-                    int p = Integer.parseInt(tmp[1]);
-                    int day = p/(2 * half_day_period);
-                    int period = p - day * 2 * half_day_period;
-                    if (period == 0) {
-                        --day;
-                        period = 2 * half_day_period;
-                    }
-
-                    System.out.print(String.format("\tBắt đầu từ tiết %d thứ %d ", period, day+2));
-                }
-                else {
-                    String[] tmp = s.split("=");
-                    int p = Integer.parseInt(tmp[1]);
-                    int day = p/(2 * half_day_period) ;
-                    int period = p - day * 2 * half_day_period;
-                    if (period == 0) {
-                        --day;
-                        period = 2 * half_day_period;
-                    }
-
-                    System.out.println(String.format("\tKết thúc vào tiết %d thứ %d", period, day+2));
-                }
-                if (cnt/3 == class_subject.size()) {
-                    ++class_id;
-                    if (class_id < _N) {
-                        class_subject = (JSONArray)((JSONArray) data.get("CLASS_NEED")).get(class_id);
-                        cnt = 0;
-                        System.out.println(String.format("Lớp %d:", class_id+1));
-                    }
-                }
-
-            }            
-
-
-        } else {
-            System.out.println("The solver has proved the problem has no solution");
+        if (solver.solve()) {
+            print_solution();
+            return 1;
         }
+        System.out.println("The solver has proved the problem has no solution");
+        return 0;
+    }
+
+    void print_solution() {
+        Solution solution = new Solution(model);
+        System.out.println("Find a solution");
+        solution.record();
+        String solution_str = solution.toString();
+        solution_str = solution_str.substring(10);
+        String[] abc = solution_str.split(",");
+
+        int cnt = 0;
+        int class_id = 0;
+        JSONArray class_subject = (JSONArray)((JSONArray) data.get("CLASS_NEED")).get(class_id);
+        System.out.println(String.format("Lớp %d:", class_id+1));
+        int _N = (int) data.get("N_CLASS");
+        for (String s : abc) 
+        if (    s.contains("class_subject_to_teacher") 
+                || s.contains("class_subject_start")
+                || s.contains("class_subject_end")){
+            int sub_id = cnt/3;
+            ++cnt;
+            if (cnt%3 == 1) {
+                String[] tmp = s.split("=");
+                int t = Integer.parseInt(tmp[1]);
+                System.out.print(String.format("\tGiáo viên %d dạy môn %d ", t, (int)class_subject.get(sub_id)));
+            }
+            else if (cnt%3 == 2) {
+                String[] tmp = s.split("=");
+                int p = Integer.parseInt(tmp[1]);
+                int day = p/(2 * half_day_period);
+                int period = p - day * 2 * half_day_period;
+                if (period == 0) {
+                    --day;
+                    period = 2 * half_day_period;
+                }
+
+                System.out.print(String.format("\tBắt đầu từ tiết %d thứ %d ", period, day+2));
+            }
+            else {
+                String[] tmp = s.split("=");
+                int p = Integer.parseInt(tmp[1]);
+                int day = p/(2 * half_day_period) ;
+                int period = p - day * 2 * half_day_period;
+                if (period == 0) {
+                    --day;
+                    period = 2 * half_day_period;
+                }
+
+                System.out.println(String.format("\tKết thúc vào tiết %d thứ %d", period, day+2));
+            }
+            if (cnt/3 == class_subject.size()) {
+                ++class_id;
+                if (class_id < _N) {
+                    class_subject = (JSONArray)((JSONArray) data.get("CLASS_NEED")).get(class_id);
+                    cnt = 0;
+                    System.out.println(String.format("Lớp %d:", class_id+1));
+                }
+            }
+
+        }            
+
     }
 
     public Model build_model(JSONObject data) {
@@ -215,60 +211,7 @@ public class Main {
         return model;
     }
 
-    public JSONObject read_data(String fn) {
-        File file = new File(fn);
-
-        JSONObject data = new JSONObject();
-
-        try {
-            Scanner scanner = new Scanner(file);
-            int T = scanner.nextInt();
-            data.put("N_TEACHER", T);
-            int N = scanner.nextInt();
-            data.put("N_CLASS", N);
-            int M = scanner.nextInt();
-            data.put("N_CLASS_SUBJECT", M);
-
-            JSONArray cn = new JSONArray();
-            for (int it = 0; it < N; ++it) {
-                JSONArray arr = new JSONArray();
-
-                while(scanner.hasNextInt()) {
-                    int val = scanner.nextInt();
-                    if (val == 0) break;
-                    arr.add(val);
-                }
-                cn.add(arr);
-            }
-            data.put("CLASS_NEED", cn);
-
-            JSONArray tct = new JSONArray();
-            for (int it = 0; it < T; ++it) {
-                JSONArray arr = new JSONArray();
-
-                while(scanner.hasNextInt()) {
-                    int val = scanner.nextInt();
-                    if (val == 0) break;
-                    arr.add(val);
-                }
-                tct.add(arr);
-            }
-            data.put("TEACHER_CAN_TEACH", tct);
-
-            JSONArray sp = new JSONArray();
-            for (int it = 0; it < M; ++it) {
-                int val = scanner.nextInt();
-                sp.add(val);
-            }
-            data.put("SUBJECT_PERIOD", sp);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return data;
-    } 
+    
 
 
 
