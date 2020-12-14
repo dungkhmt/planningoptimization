@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/kratos/Downloads/**/*.jar",
+        "c:\\Users\\truon\\Downloads\\choco-solver-4.10.5-jar-with-dependencies.jar",
+        "src/class118133/truongngocgiang/project23/choco_solver/json-simple-1.1.jar"
+    ]
+}
