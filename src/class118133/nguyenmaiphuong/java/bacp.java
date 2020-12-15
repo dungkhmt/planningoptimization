@@ -54,7 +54,7 @@ public class bacp {
 
     public void search() {
         TabuSearch ts = new TabuSearch();
-        ts.search(S, 20, 10000, 10000, 100);
+        ts.search(constraintSystem, 20, 10000, 10000, 100);
         /*HillClimbing searcher = new HillClimbing();
         searcher.hillClimbing(constraintSystem, 10000);*/
     }
