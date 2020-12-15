@@ -29,10 +29,12 @@ public class DataGenerator {
             int M = rand.nextInt(cond._n_subject) + 1;
             int max_period = rand.nextInt(cond._max_period_of_class - 14) + 14;
             int max_subject = rand.nextInt(cond._max_subject_of_teacher) + 1;
+            System.out.println(T + " " + M + " " + max_subject);
             while (T * max_subject < M) {
                 T = rand.nextInt(cond._n_teacher) + 1;
                 M = rand.nextInt(cond._n_subject) + 1;
                 max_subject = rand.nextInt(cond._max_subject_of_teacher) + 1;
+                System.out.println(T + " " + M + " " + max_subject);
             }
 
             String fn = _dir + "/" + String.format("%d_%d_%d_%d_%d.txt", T, N, M, max_period, max_subject);

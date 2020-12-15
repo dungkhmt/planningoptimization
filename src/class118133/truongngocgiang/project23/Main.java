@@ -13,14 +13,14 @@ import heuristic.HeuristicSolver;
 
 public class Main {
     public static void main(String[] args) {
-        // String fn = "data.txt";
+        String fn = "data.txt";
         int half_day_period = 6;
-        // int n_day = 6;
+        int n_day = 6;
 
-        // HeuristicSolver app = new HeuristicSolver(half_day_period, n_day);
-        // JSONObject data = read_data(fn);
-        // // System.out.println(data.toJSONString());
-        // app.solve(data);
+        ChocoSolver app = new ChocgoSolver(half_day_period, n_day);
+        JSONObject data = read_data(fn);
+        // System.out.println(data.toJSONString());
+        app.solve(data);
 
 
         Condition cond = new Condition();
