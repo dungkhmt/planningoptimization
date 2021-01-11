@@ -48,16 +48,11 @@ public class GenericHillClimbingSearch {
 			
 			exploreNeighborhood();
 			if(cand.size() <= 0){
-				System.out.println("Reach  local optimum"); break;
+				System.out.println("Reach local optimum"); break;
 			}
 			Move m = cand.get(R.nextInt(cand.size()));
 			X[m.i].setValuePropagate(m.val);// local move for generating new solution
 			System.out.println("Step " + it + " Move X[" + m.i + "] = " + m.val + ", violations = " + c.violations());
 		}
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

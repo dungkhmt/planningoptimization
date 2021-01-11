@@ -1,7 +1,7 @@
+
 package dinhvanhieu;
 
 import localsearch.constraints.alldifferent.AllDifferent;
-import localsearch.constraints.basic.Implicate;
 import localsearch.model.ConstraintSystem;
 import localsearch.model.LocalSearchManager;
 import localsearch.model.VarIntLS;
