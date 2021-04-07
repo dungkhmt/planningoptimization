@@ -1263,7 +1263,7 @@ public class TabuSearch {
 					 * the best solution found so far (best)
 					 */
 					if (tabu[i][v - minV] <= it
-							|| S.violations() + delta < best) {
+							|| S.violations() + delta < best) {// aspiration criterion
 						if (delta < minDelta) {
 							minDelta = delta;
 							sel_i = i;
