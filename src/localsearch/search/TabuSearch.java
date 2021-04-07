@@ -394,7 +394,7 @@ public class TabuSearch {
 		for (int i = 0; i < x.length; i++)
 			x_best[i] = x[i].getValue();
 
-		System.out.println("TabuSearch, init S = " + S.violations());
+		//System.out.println("TabuSearch, init S = " + S.violations());
 		int nic = 0;
 		ArrayList<OneVariableValueMove> moves = new ArrayList<OneVariableValueMove>();
 		Random R = new Random();
@@ -435,7 +435,7 @@ public class TabuSearch {
 			}
 
 			if (moves.size() <= 0) {
-				System.out.println("TabuSearch::restart.....");
+				// System.out.println("TabuSearch::restart.....");
 				restartMaintainConstraintFunction(x, S, f2, tabu);
 				nic = 0;
 			} else {
@@ -472,7 +472,7 @@ public class TabuSearch {
 				if(f1.getValue() >= best){
 					nic++;
 					if (nic > maxStable) {
-						System.out.println("TabuSearch::restart.....");
+						// System.out.println("TabuSearch::restart.....");
 						restartMaintainConstraintFunction(x, S, f2, tabu);
 						nic = 0;
 					}
@@ -1131,7 +1131,7 @@ public class TabuSearch {
 		for (int i = 0; i < x.length; i++)
 			x_best[i] = x[i].getValue();
 
-		System.out.println("TabuSearch, init S = " + S.violations());
+		//System.out.println("TabuSearch, init S = " + S.violations());
 		int nic = 0;
 		ArrayList<OneVariableValueMove> moves = new ArrayList<OneVariableValueMove>();
 		Random R = new Random();
@@ -1172,7 +1172,7 @@ public class TabuSearch {
 
 			// perform the move
 			if (moves.size() <= 0) {
-				System.out.println("TabuSearch::restart.....");
+				// System.out.println("TabuSearch::restart.....");
 				restartMaintainConstraint(x, S, tabu);
 				nic = 0;
 			} else {
@@ -1197,7 +1197,7 @@ public class TabuSearch {
 				if(f.getValue() >= best){
 					nic++;
 					if (nic > maxStable) {
-						System.out.println("TabuSearch::restart.....");
+						// System.out.println("TabuSearch::restart.....");
 						restartMaintainConstraint(x, S, tabu);
 						nic = 0;
 					}
@@ -1244,7 +1244,7 @@ public class TabuSearch {
 		for (int i = 0; i < x.length; i++)
 			x_best[i] = x[i].getValue();
 
-		System.out.println("TabuSearch, init S = " + S.violations());
+		//System.out.println("TabuSearch, init S = " + S.violations());
 		int nic = 0;
 		ArrayList<OneVariableValueMove> moves = new ArrayList<OneVariableValueMove>();
 		Random R = new Random();
@@ -1282,7 +1282,7 @@ public class TabuSearch {
 			}
 
 			if (moves.size() <= 0) {
-				System.out.println("TabuSearch::restart.....");
+				// System.out.println("TabuSearch::restart.....");
 				restartMaintainConstraint(x, S, tabu);
 				if(S.violations() == 0){
 				best = S.violations();
@@ -1299,9 +1299,9 @@ public class TabuSearch {
 				x[sel_i].setValuePropagate(sel_v);
 				tabu[sel_i][sel_v - minV] = it + tabulen;
 
-				System.out.println("Step " + it + ", S = " + S.violations()
-						+ ", best = " + best + ", delta = " + minDelta
-						+ ", nic = " + nic);
+				// System.out.println("Step " + it + ", S = " + S.violations()
+				// 		+ ", best = " + best + ", delta = " + minDelta
+				// 		+ ", nic = " + nic);
 				// update best
 				if (S.violations() < best) {
 					best = S.violations();
@@ -1315,7 +1315,7 @@ public class TabuSearch {
 				if(S.violations() >= best){
 					nic++;
 					if (nic > maxStable) {
-						System.out.println("TabuSearch::restart.....");
+						// System.out.println("TabuSearch::restart.....");
 						restartMaintainConstraint(x, S, tabu);
 						nic = 0;
 					}
